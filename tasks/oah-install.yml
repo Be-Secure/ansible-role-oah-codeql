@@ -3,10 +3,10 @@
       msg: "oah-install of oah.codeql"
 
     vars:
-            clone_path_repo: '/home/vagrant/test_role_codeql/codeql_repo'
-            clone_path_zip: '/home/vagrant/test_role_codeql/codeql_repo/codeql_repos'
+       clone_path_repo: '/home/vagrant/codeql-repo'
+       clone_path_zip: '/opt/'
 
-  - name: CodeQl Fetch
+  - name: CodeQl binary fetch
     become: yes
     delegate_to: localhost
     get_url:
@@ -15,15 +15,17 @@
       timeout: 300
 
   - name: Extracting the codeql zip file
-    shell: unzip "{{ clone_path_zip }}"
+    shell: unzip "{{ clone_path_zip }}/codeql-linux64.zip"
 
-  - name: Ensure codeql installed
-    shell: sh codeql/codeql --version
-    register: codeql_version
+  - name: Setting up symlinks
+    become: yes
+    shell: ln -s "{{ clone_path_zip }}"/codeql/codeql /usr/bin/cql
 
   - name: Download CodeQL sample queries for all supported languages.
     git:
-      repo: https://github.com/github/codeql.git
+      repo: https://github.com/be-secure/besip.git
       dest: "{{ clone_path_repo }}"
       clone: yes
       update: yes
+
+

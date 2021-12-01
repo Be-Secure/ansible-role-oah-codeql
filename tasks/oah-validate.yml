@@ -1,0 +1,11 @@
+---
+  - debug:
+      msg: "oah-install of oah.codeql"
+
+  - name: Ensure codeql installed
+    shell: cql --version
+    register: codeql_version
+    
+  - debug:
+      var: codeql_version
+

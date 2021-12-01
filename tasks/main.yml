@@ -11,6 +11,6 @@
     #- include: tasks/oah-reset.yml
     #when: oah_command == "reset"
 
-    #- include: tasks/oah-validate.yml
-    #  when: oah_command == "validate"
+- include: tasks/oah-validate.yml
+  when: oah_command == "validate"
 
