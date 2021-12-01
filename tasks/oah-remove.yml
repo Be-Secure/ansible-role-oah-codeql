@@ -1,0 +1,9 @@
+---
+    - debug:
+        msg: "oah-removal of oah.codeql"
+
+    - name: Remove the codeql Binary\
+      vars:
+            clone_path_repo: '/home/vagrant/xyz'
+            clone_path_zip: '/home/vagrant/'
+      shell: rm -rf {{ clone_path_repo }} {{  clone_path_zip }}
